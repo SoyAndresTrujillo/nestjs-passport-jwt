@@ -17,7 +17,7 @@ import config from './config';
       load: [config],
       envFilePath: enviroments[process.env.NODE_ENV] || '.env',
       validationSchema: Joi.object({
-        API_KEY_DEV: Joi.string().required(),
+        API_KEY: Joi.string().required(),
         DATABASE_URL: Joi.string().required(),
         DATABASE_PORT: Joi.number().required(),
         DB_USER: Joi.string().required(),
@@ -35,4 +35,4 @@ import config from './config';
   controllers: [AppController],
   providers: [AppService],
 })
-export class AppModule { }
+export class AppModule {}

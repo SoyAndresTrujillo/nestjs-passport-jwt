@@ -4,7 +4,6 @@ export default registerAs('config', () => {
   return {
     database: {
       url: process.env.DATABASE_URL,
-      apiKey: process.env.API_KEY_DEV,
       port: process.env.DATABASE_PORT,
     },
     postgres: {
@@ -14,5 +13,6 @@ export default registerAs('config', () => {
       password: process.env.DB_PASSWORD,
       port: parseInt(process.env.DATABASE_PORT, 10),
     },
+    apiKey: process.env.API_KEY,
   };
 });

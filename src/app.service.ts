@@ -11,7 +11,7 @@ export class AppService {
   ) {}
 
   getHello(): string {
-    const API_KEY = this.configEnv.database.apiKey;
+    const API_KEY = this.configEnv.apiKey;
     const URL = this.configEnv.database.url;
     const PORT = this.configEnv.database.port;
     return `Hello World!, that is my API_KEY: ${API_KEY} and CONECTION_MONGO_DB: ${URL} and port ${PORT}`;
