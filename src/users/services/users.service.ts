@@ -33,6 +33,10 @@ export class UsersService {
     return user;
   }
 
+  async findByEmail(email: string) {
+    return await this.userRepository.findOne({ where: { email } });
+  }
+
   async create(data: CreateUserDto) {
     const newUser = this.userRepository.create(data);
     const hashPassword = await bcrypt.hash(newUser.password, 10);
