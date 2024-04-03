@@ -18,6 +18,7 @@ import config from './config';
       envFilePath: enviroments[process.env.NODE_ENV] || '.env',
       validationSchema: Joi.object({
         API_KEY: Joi.string().required(),
+        JWT_SECRET: Joi.string().required(),
         DATABASE_URL: Joi.string().required(),
         DATABASE_PORT: Joi.number().required(),
         DB_USER: Joi.string().required(),
