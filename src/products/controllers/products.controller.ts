@@ -9,7 +9,9 @@ import {
   HttpStatus,
   HttpCode,
   Query,
+  UseGuards,
 } from '@nestjs/common';
+import { AuthGuard } from '@nestjs/passport';
 
 import { ParseIntPipe } from '../../common/parse-int.pipe';
 import {
@@ -20,6 +22,7 @@ import {
 
 import { ProductsService } from './../services/products.service';
 
+@UseGuards(AuthGuard('jwt'))
 @Controller('products')
 export class ProductsController {
   constructor(private productsService: ProductsService) {}
