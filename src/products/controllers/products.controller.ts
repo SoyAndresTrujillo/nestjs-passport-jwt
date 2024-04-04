@@ -11,7 +11,9 @@ import {
   Query,
   UseGuards,
 } from '@nestjs/common';
-import { AuthGuard } from '@nestjs/passport';
+
+import { JwtAuthGuard } from '../../auth/guards/jwt-auth/jwt-auth.guard';
+import { Public } from '../../auth/decorators/public.decorator';
 
 import { ParseIntPipe } from '../../common/parse-int.pipe';
 import {
@@ -22,11 +24,12 @@ import {
 
 import { ProductsService } from './../services/products.service';
 
-@UseGuards(AuthGuard('jwt'))
+@UseGuards(JwtAuthGuard)
 @Controller('products')
 export class ProductsController {
   constructor(private productsService: ProductsService) {}
 
+  @Public()
   @Get()
   getProducts(@Query() params: PaginationProductDto) {
     return this.productsService.findAll(params);
@@ -37,6 +40,7 @@ export class ProductsController {
     return `yo soy un filter`;
   }
 
+  @Public()
   @Get(':productId')
   @HttpCode(HttpStatus.ACCEPTED)
   getOne(@Param('productId', ParseIntPipe) productId: number) {
