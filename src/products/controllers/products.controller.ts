@@ -15,6 +15,10 @@ import {
 import { JwtAuthGuard } from '../../auth/guards/jwt-auth/jwt-auth.guard';
 import { Public } from '../../auth/decorators/public.decorator';
 
+import { RoleGuard } from '../../auth/guards/role/role.guard';
+import { Roles } from '../../auth/decorators/role.decorator';
+import { Role } from '../../auth/models/role.model';
+
 import { ParseIntPipe } from '../../common/parse-int.pipe';
 import {
   CreateProductDto,
@@ -24,7 +28,7 @@ import {
 
 import { ProductsService } from './../services/products.service';
 
-@UseGuards(JwtAuthGuard)
+@UseGuards(JwtAuthGuard, RoleGuard)
 @Controller('products')
 export class ProductsController {
   constructor(private productsService: ProductsService) {}
@@ -47,6 +51,7 @@ export class ProductsController {
     return this.productsService.findOne(productId);
   }
 
+  @Roles(Role.ADMIN)
   @Post()
   create(@Body() payload: CreateProductDto) {
     return this.productsService.create(payload);
